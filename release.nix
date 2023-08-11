@@ -1,7 +1,7 @@
 { mkDerivation, base, directory, fdo-notify, Glob, lib, process }:
 mkDerivation {
   pname = "mailsync";
-  version = "0.1.0.0";
+  version = "0.1.0.1";
   src = ./.;
   isLibrary = false;
   isExecutable = true;

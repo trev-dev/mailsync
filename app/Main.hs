@@ -16,12 +16,11 @@ messageCount path = do
 
 wrapNotification :: Int -> FilePath -> Note
 wrapNotification count icon =
-  newNote { summary="You have new mail"
-          , body=Just . Text $ show count ++ " messages"
-          , hints=[ Category EmailArrived
-                  , ImagePath $ Icon icon]}
-  where
-    newNote = blankNote {appName="Mailsync"}
+  blankNote { appName = "Mailsync"
+            , summary = "You have new mail"
+            , body = Just . Text $ show count ++ " messages"
+            , hints = [ Category EmailArrived
+                    , ImagePath $ Icon icon]}
 
 emitNotification :: Note -> IO ()
 emitNotification note = do
