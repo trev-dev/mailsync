@@ -1,11 +1,14 @@
 module Main where
 
 import System.Directory
-import Data.Functor
-import DBus.Notify
+import System.Environment
 import System.FilePath.Glob
-import Control.Monad
 import System.Process
+
+import Control.Monad
+import Control.Exception
+
+import DBus.Notify
 import Paths_mailsync
 
 messageCount :: String -> IO Int
@@ -27,11 +30,18 @@ emitNotification note = do
   client <- connectSession
   void $ notify client note
 
+mailSyncCmd :: IO String
+mailSyncCmd = do
+  envCommand <- try (getEnv "MAILSYNC_COMMAND") :: IO (Either SomeException String)
+  return $ case envCommand of
+    Left _ -> "mailsync -a"
+    Right cmd -> cmd
+
 main :: IO ()
 main = do
-  callProcess "mbsync" ["-a"]
-  home <- getHomeDirectory
-  let newMessageDirs = home ++ "/Maildir/fastmail/*/new"
+  newMessageDirs <- getEnv "MAILSYNC_FOLDERS";
+  syncCommand <- mailSyncCmd
+  callCommand syncCommand
   newMessageCount <- messageCount newMessageDirs
   when (newMessageCount > 0) $ do
     icon <- getDataFileName "envelope.png"

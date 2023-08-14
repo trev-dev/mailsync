@@ -13,7 +13,7 @@
 
     packages.${system}.mailsync = pkgs.haskellPackages.mkDerivation {
       pname = "mailsync";
-      version = "0.1.0.1";
+      version = "0.2.0.0";
       src = ./.;
       isLibrary = false;
       isExecutable = true;
