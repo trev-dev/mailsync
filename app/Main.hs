@@ -32,10 +32,10 @@ emitNotification note = do
 
 mailSyncCmd :: IO String
 mailSyncCmd = do
-  envCommand <- try (getEnv "MAILSYNC_COMMAND") :: IO (Either SomeException String)
-  return $ case envCommand of
-    Left _ -> "mailsync -a"
-    Right cmd -> cmd
+  cmd <- try $ getEnv "MAILSYNC_COMMAND"
+  return $ case (cmd :: Either IOError String) of
+    Left _ -> "mbsync -a"
+    Right c -> c
 
 main :: IO ()
 main = do

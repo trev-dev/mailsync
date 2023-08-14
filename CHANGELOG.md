@@ -1,6 +1,6 @@
 # Revision history for mailsync
 
-## 0.2.0.0 -- 2023-08-14
+## 0.2.0.1 -- 2023-08-14
 
 **Breaking Changes!**
 * Added the ability to configure Mailsync with 2 env vars:
