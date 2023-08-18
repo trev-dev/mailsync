@@ -1,5 +1,8 @@
 # Mailsync
 
+Note: This is a github mirror and may be out of date.  I suggest you check out
+[sourcehut](https://git.sr.ht/~trevdev/mailsync)
+
 This is a Haskell experiment that went way better than I thought it would.
 
 ## What is it?
